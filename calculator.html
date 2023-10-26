@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Calculator</a>
+        </div>
+    </nav>
+
+    <h1 style="text-align: center;">Calculator</h1>
+    <div ng-app="calculatorApp" ng-controller="CalculatorController">
+        <input type="number" ng-model="first">
+        <select ng-model="operation">
+            <option value="add">Addition (+)</option>
+            <option value="subtract">Subtraction (-)</option>
+            <option value="multiply">Multiplication (*)</option>
+            <option value="divide">Division (/)</option>
+        </select>
+        <input type="number" ng-model="second">
+        <br>
+        <p>Result: {{ calculate() }}</p>
+    </div>
+
+    <script>
+        var app = angular.module('calculatorApp', []);
+
+        app.controller('CalculatorController', function ($scope) {
+            $scope.first = 0;
+            $scope.second = 0;
+            $scope.operation = 'add';
+
+            $scope.calculate = function () {
+                switch ($scope.operation) {
+                    case 'add':
+                        return $scope.first + $scope.second;
+                    case 'subtract':
+                        return $scope.first - $scope.second;
+                    case 'multiply':
+                        return $scope.first * $scope.second;
+                    case 'divide':
+                        if ($scope.second === 0) {
+                            return 'Cannot divide by zero';
+                        }
+                        return $scope.first / $scope.second;
+                    default:
+                        return 'Invalid operation';
+                }
+            };
+        });
+    </script>
+</body>
+</html>
