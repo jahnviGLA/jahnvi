@@ -5,18 +5,22 @@
 
 <div ng-app="myApp" ng-controller="studentsCtrl"> 
 
-<ul>
+<ol>
   <li ng-repeat="x in myData">
-    {{ x.Name + ', ' + x.City +', ' + x.Marks +', ' + x.Gender}}
+    {{x.Marks}}
+
   </li>
-</ul>
+</ol>
+<tr ng-repeat="x in myData">
+	<td>{{x.Marks}}</td>
+</tr>
 
 </div>
 
 <script>
 var app = angular.module('myApp', []);
 app.controller('studentsCtrl', function($scope, $http) {
-  $http.get("https://gpnmjenofbfeawopmhkj.supabase.co/storage/v1/object/public/public/gmc_files/gladata3.php").then(function (response) {
+  $http.get("https://gpnmjenofbfeawopmhkj.supabase.co/storage/v1/object/public/public/gmc_files/gladata1.php").then(function (response) {
       $scope.myData = response.data.records;
   });
 });
